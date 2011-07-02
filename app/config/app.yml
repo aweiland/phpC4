@@ -2,10 +2,10 @@ production:
   test: something
   
   doctrine:
-    proxyDir: ROOT_PATH/data/cache
+    proxyDir: ROOT_PATH/app/tmp
     proxyNamespace: Proxies
     
-    hydratorDir: ROOT_PATH/data/cache
+    hydratorDir: ROOT_PATH/app/tmp
     hydratorNamespace: Hydrators
     
     annotationNamespace: Doctrine\ODM\MongoDB\Mapping\

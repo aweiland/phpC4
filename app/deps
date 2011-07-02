@@ -1,0 +1,29 @@
+[twig]
+    git=http://github.com/fabpot/Twig.git
+
+[monolog]
+    git=http://github.com/Seldaek/monolog.git
+
+[doctrine-common]
+    git=http://github.com/doctrine/common.git
+
+[doctrine-dbal]
+    git=http://github.com/doctrine/dbal.git
+
+[doctrine]
+    git=http://github.com/doctrine/doctrine2.git
+
+[swiftmailer]
+    git=http://github.com/swiftmailer/swiftmailer.git
+    version=origin/4.1
+
+[twig-extensions]
+    git=http://github.com/fabpot/Twig-extensions.git
+
+    
+[doctrine-mongodb]
+    git=http://github.com/doctrine/mongodb.git
+
+[doctrine-mongodb-odm]
+    git=http://github.com/doctrine/mongodb-odm.git
+

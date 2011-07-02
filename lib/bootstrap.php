@@ -8,27 +8,28 @@ use C4\TemplateFactory;
 use C4\ConfigFactory;
 use C4\Registry;
 
-
+// Hardcore defines
 define('LIB_PATH', realpath(dirname(__FILE__)));
 define('WWW_PATH', realpath(dirname(__FILE__) . '/../webroot'));
 define('ROOT_PATH', realpath(dirname(__FILE__). '/..'));
 define('VENDOR_PATH', realpath(dirname(__FILE__). '/../vendor'));
+define('APP_PATH', realpath(dirname(__FILE__) . '/../app'));
 
 
 defined('APP_ENV') ? : define('APP_ENV', 'production');
 
-require LIB_PATH . '/Doctrine/Common/ClassLoader.php';
+// Doctrine autoloader
+require VENDOR_PATH . '/doctrine-common/lib/Doctrine/Common/ClassLoader.php';
 
-//
-$classLoader = new ClassLoader('Doctrine', LIB_PATH);
+
+$classLoader = new ClassLoader('Doctrine\\Common', VENDOR_PATH . '/doctrine-common/lib');
 $classLoader->register();
-
 
 $classLoader = new ClassLoader('C4', LIB_PATH);
 $classLoader->register();
 
 // Site configuration
-Configure::init('yaml', ROOT_PATH . '/config/app.yml');
+Configure::init('yaml', APP_PATH . '/config/app.yml');
 $cfg = Configure::get();
 Registry::set('config', $cfg);
 
@@ -37,5 +38,10 @@ Registry::set('config', $cfg);
 
 
 
+$classLoader = new ClassLoader('Monolog', VENDOR_PATH . '/monolog/src');
+$classLoader->register();
 
 
+if (file_exists(APP_PATH . '/bootstrap.php')) {
+	require_once APP_PATH . '/bootstrap.php';
+}
