@@ -1,0 +1,46 @@
+production:
+  test: something
+  
+  doctrine:
+    proxyDir: ROOT_PATH/data/cache
+    proxyNamespace: Proxies
+    
+    hydratorDir: ROOT_PATH/data/cache
+    hydratorNamespace: Hydrators
+    
+    annotationNamespace: Doctrine\ODM\MongoDB\Mapping\
+    metadataDriverPath: LIB_PATH/Game/Documents
+    
+      
+  frontController:
+    controllerNamespace: Game\Controller
+  
+  
+development:
+  inherit: production
+  
+  test2: more
+  test: override
+  
+  
+default:
+  test: whatever
+  
+  site:
+    name: phpC4
+    staticUrl: "/static"
+  
+  templateEngine: smarty
+  
+  smarty:
+    templateDir: ROOT_PATH/app/templates
+    compileDir: ROOT_PATH/app/tmp/templates_c
+    cacheDir: ROOT_PATH/tmp
+    configDir: ROOT_PATH/config
+    resources:
+      c4: C4\View\Template\SmartyExtensions
+    defaultResource: c4
+    
+    
+  layout:
+    default: layouts/default

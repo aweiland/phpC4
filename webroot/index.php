@@ -3,6 +3,7 @@ use C4\Controller\FrontController;
 use C4\Configure;
 use Game\Container;
 use Game\Registry;
+
 chdir('..');
 //include('includes/site.php');
 
