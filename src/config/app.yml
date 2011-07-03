@@ -13,7 +13,7 @@ production:
     
       
   frontController:
-    controllerNamespace: Game\Controller
+    controllerNamespace: App\Controller
   
   
 development:

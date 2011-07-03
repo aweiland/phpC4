@@ -17,3 +17,5 @@ $classLoader->register();
 $classLoader = new $classLoader('Doctrine', VENDOR_PATH . '/doctrine/lib');
 $classLoader->register();
 
+$classLoader = new ClassLoader('App', APP_PATH);
+$classLoader->register();

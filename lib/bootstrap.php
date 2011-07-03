@@ -13,7 +13,7 @@ define('LIB_PATH', realpath(dirname(__FILE__)));
 define('WWW_PATH', realpath(dirname(__FILE__) . '/../webroot'));
 define('ROOT_PATH', realpath(dirname(__FILE__). '/..'));
 define('VENDOR_PATH', realpath(dirname(__FILE__). '/../vendor'));
-define('APP_PATH', realpath(dirname(__FILE__) . '/../app'));
+define('APP_PATH', realpath(dirname(__FILE__) . '/../src'));
 
 
 defined('APP_ENV') ? : define('APP_ENV', 'production');

@@ -39,6 +39,8 @@ final class FrontController {
 
 	/**
 	 * Dispatch an action to a controller
+	 * @todo Remove "Layout"  It was an idea borrowed from zend, but both smarty and twig do inheritance, it's dumb
+	 * 
 	 */
 	public function dispatch()
 	{
@@ -57,7 +59,7 @@ final class FrontController {
 		$rawActionName = (empty($actionName)) ? 'index' : $actionName;
 		
 		$controllerName = self::inflect($rawControllerName);
-		$actionName = self::inflect($rawActionName, false);
+		$actionName = self::inflect($rawActionName, false) . 'Action';
 		
 		$controllerClass = Configure::read('frontController.controllerNamespace') . '\\' . $controllerName . 'Controller';
 		if (!class_exists($controllerClass)) {
