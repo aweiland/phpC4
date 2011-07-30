@@ -55,8 +55,8 @@ abstract class ConfigAbstract extends \ArrayObject
 	
 	private function replaceConstants($cfg)
 	{
-		$search = array('APP_ENV', 'LIB_PATH', 'WWW_PATH', 'ROOT_PATH');
-		$replace = array(APP_ENV, LIB_PATH, WWW_PATH, ROOT_PATH);
+		$search = array('APP_ENV', 'LIB_PATH', 'WWW_PATH', 'ROOT_PATH', 'TMP_PATH', 'APP_PATH');
+		$replace = array(APP_ENV, LIB_PATH, WWW_PATH, ROOT_PATH, TMP_PATH, APP_PATH);
 		
 		foreach ($cfg as &$val) {
 			if (is_array($val)) {

@@ -1,6 +1,8 @@
 <?php
 namespace C4\View;
 
+use C4\View\Template\Adapter\TwigAdapter;
+
 use C4\Configure;
 use C4\View\Template\Template;
 use C4\View\Template\TemplateInterface;
@@ -11,15 +13,22 @@ class View
 {
 	
 	/**
-	 * 
-	 * Enter description here ...
+	 * Template system
 	 * @var Template
 	 */
 	protected $template;
 	
 	protected $viewAction;
-	
+
+	/**
+	 * 
+	 * Enter description here ...
+	 * @var unknown_type
+	 * @deprecated Twig and smary do template inheritance, this is not needed
+	 */
 	protected $layout = 'layouts/default';
+	
+	
 	
 	public function __construct()
 	{
@@ -78,16 +87,35 @@ class View
 		switch (Configure::read('templateEngine')) {
 			case 'smarty' : $tmpl->setTemplateAdapter($this->getSmartyAdapter());
 				break;
+			case 'twig' : $tmpl->setTemplateAdapter($this->getTwigAdapter());
+				break;
 			default: throw new Exception('Invalid Template Engine');	
 		}
 		
 		$this->setTemplate($tmpl);
 	}
 	
+	/**
+	 * Get the Twig adapter
+	 * @return TwigAdapter
+	 */
+	protected function getTwigAdapter()
+	{
+		require_once VENDOR_PATH . '/twig/lib/Twig/Autoloader.php';
+		\Twig_Autoloader::register();
+		
+		$loader = new \Twig_Loader_Filesystem(Configure::read('twig.templateDir'));
+		$twig = new \Twig_Environment($loader, array('cache' => Configure::read('twig.cacheDir')));
+		
+		return new TwigAdapter($twig);
+	}
+	
+	
 	
 	/**
 	 * Get the smarty template adapter
 	 * @return SmartyAdapter
+	 * @deprecated In favor of twig.  Could still be resurrected
 	 */
 	protected function getSmartyAdapter()
 	{

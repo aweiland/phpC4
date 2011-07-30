@@ -10,6 +10,7 @@ final class ConfigFactory
 	 * Create a config object
 	 * @param string $type
 	 * @param string $file
+	 * 
 	 * @return ConfigAbstract
 	 * @throws \InvalidArgumentException
 	 */

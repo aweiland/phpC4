@@ -30,7 +30,12 @@ default:
     name: phpC4
     staticUrl: "/static"
   
-  templateEngine: smarty
+  templateEngine: twig
+  
+  twig:
+    templateDir: APP_PATH/App/View
+    cacheDir: TMP_PATH
+    compileDir: TMP_PATH
   
   smarty:
     templateDir: ROOT_PATH/app/templates
