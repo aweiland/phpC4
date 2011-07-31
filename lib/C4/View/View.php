@@ -35,19 +35,7 @@ class View
 		$this->initTemplate();
 	}
 	
-	/**
-	 * Set the view layout
-	 * @param string $layout
-	 */
-	public function setLayout($layout)
-	{
-		$this->layout = $layout;
-	}
 	
-	public function getLayout()
-	{
-		return $this->layout;
-	}
 	
 	
 	/**
@@ -55,9 +43,11 @@ class View
 	 */
 	public function render()
 	{
-		$pageContent = $this->template->fetch($this->viewAction);
-		$this->template->assign('page_content', $pageContent);
-		$this->display($this->layout);
+		$this->template->render();
+		
+//		$pageContent = $this->template->fetch($this->viewAction);
+//		$this->template->assign('page_content', $pageContent);
+//		$this->display($this->layout);
 	}
 	
 	/**
@@ -98,6 +88,7 @@ class View
 	/**
 	 * Get the Twig adapter
 	 * @return TwigAdapter
+	 * @todo This (and smarty) needs to move.  This isn't a good place for it.  Probably should be in Template
 	 */
 	protected function getTwigAdapter()
 	{
@@ -105,6 +96,9 @@ class View
 		\Twig_Autoloader::register();
 		
 		$loader = new \Twig_Loader_Filesystem(Configure::read('twig.templateDir'));
+		
+		$opts = array();
+		
 		$twig = new \Twig_Environment($loader, array('cache' => Configure::read('twig.cacheDir')));
 		
 		return new TwigAdapter($twig);
@@ -170,18 +164,19 @@ class View
 		$this->template = $template;
 	}
 
-	/* (non-PHPdoc)
-	 * @see C4\View\Template.TemplateInterface::assign()
+
+	/**
+	 * Assign a value to a variable.  Wraps around Template.assign
+	 * 
+	 * @param string $var
+	 * @param mixed $val
 	 */
 	public function assign($var, $val) {
 		$this->template->assign($var, $val);		
 	}
 
-	/* (non-PHPdoc)
-	 * @see C4\View\Template.TemplateInterface::display()
-	 */
-	public function display($name) {
-		$this->template->display($name);		
+	public function display() {
+		$this->template->display($this->getViewAction());		
 	}
 
 	

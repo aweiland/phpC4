@@ -33,7 +33,12 @@ class TwigAdapter implements TemplateInterface
 	 * @see Game\Templace.TemplateInterface::render()
 	 */
 	public function display($name) {
+		if (strpos($name, '.twig') === false) {
+			$name .= '.twig';
+		}
 		
+		$template = $this->twig->loadTemplate($name);
+		echo $template->render($this->vars);
 	}
 	
 	/* (non-PHPdoc)

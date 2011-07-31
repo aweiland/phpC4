@@ -15,6 +15,7 @@ final class Configure
 	/**
 	 * Get a config value
 	 * @param string $var
+	 * @todo Make the array one dimensional and make periods a separator.
 	 */
 	public static function read($var)
 	{

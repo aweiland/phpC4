@@ -18,10 +18,9 @@ class Template implements TemplateInterface
 	}
 	
 
-	public function render($tm, $display = 'index/index.html' ) {
-		$page = $this->templateAdapter->fetch($tm);
-		$this->templateAdapter->assign('page_content', $page);
-		$this->templateAdapter->display($display);
+	public function render($tm, $display = 'index/index.html' ) 
+	{
+		
 	}
 	
 	/**

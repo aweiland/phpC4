@@ -56,10 +56,11 @@ final class FrontController {
 		$actionName = array_shift($parts);
 		
 		$rawControllerName = (empty($controllerName)) ? 'index' : $controllerName;
-		$rawActionName = (empty($actionName)) ? 'index' : $actionName;
-		
 		$controllerName = self::inflect($rawControllerName);
-		$actionName = self::inflect($rawActionName, false) . 'Action';
+		
+		$rawActionName = (empty($actionName)) ? 'index' : $actionName;
+		$actionName = self::inflect($rawActionName, false);
+		$fullActionName = $rawActionName . 'Action';
 		
 		$controllerClass = Configure::read('frontController.controllerNamespace') . '\\' . $controllerName . 'Controller';
 		if (!class_exists($controllerClass)) {
@@ -72,22 +73,23 @@ final class FrontController {
 			throw new InvalidActionException(sprintf('Controller is invalid subclass [%s]', $controllerName));
 		}
 		
-		if (!method_exists($controller, $actionName)) {
+		if (!method_exists($controller, $fullActionName)) {
 			throw new InvalidActionException(sprintf('Invalid action [%s] for controller [%s]', $actionName, $controllerName));
 		}
 		
 		$view = new View();
-		$view->setViewAction("$rawControllerName/$rawActionName");
-		$layout = Configure::read('layout.default');
-		if ($layout) {
-			$view->setLayout($layout);
-		}
+		$view->setViewAction("$controllerName/$actionName");
+		
+//		$layout = Configure::read('layout.default');
+//		if ($layout) {
+//			$view->setLayout($layout);
+//		}
 		$controller->setView($view);
 		
 		$controller->init();
-		$controller->$actionName();
+		$controller->$fullActionName();
 	
-		$view->render();
+		$view->display();
 	}
 	
 	/**
