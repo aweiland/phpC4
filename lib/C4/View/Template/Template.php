@@ -18,14 +18,9 @@ class Template implements TemplateInterface
 	}
 	
 
-	public function render($tm, $display = 'index/index.html' ) 
-	{
-		
-	}
-	
 	/**
 	 * Get the template Adapter
-	 * Enter description here ...
+	 * @return TemplateInterface
 	 */
 	public function getTemplateAdapter()
 	{

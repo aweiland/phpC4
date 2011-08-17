@@ -1,6 +1,10 @@
 <?php
 namespace C4\View;
 
+use C4\View\Template\Extension\TwigUrlExtension;
+
+use C4\Inflector;
+
 use C4\View\Template\Adapter\TwigAdapter;
 
 use C4\Configure;
@@ -9,6 +13,9 @@ use C4\View\Template\TemplateInterface;
 use C4\View\Template\Adapter\SmartyAdapter;
 use C4\Exception;
 
+/**
+ * @todo Evaluate: View sits on top of template, which sits on top of templateadapter.  Is this too much?
+ */
 class View 
 {
 	
@@ -36,18 +43,13 @@ class View
 	}
 	
 	
-	
-	
 	/**
 	 * Render the view action
+	 * @deprecated
 	 */
 	public function render()
 	{
 		$this->template->render();
-		
-//		$pageContent = $this->template->fetch($this->viewAction);
-//		$this->template->assign('page_content', $pageContent);
-//		$this->display($this->layout);
 	}
 	
 	/**
@@ -67,6 +69,7 @@ class View
 
 	/**
 	 * Get template engine
+	 * @todo Config should have a template adapter class with options
 	 * @return C4\View\Template\Template
 	 */
 	public function initTemplate()
@@ -88,7 +91,8 @@ class View
 	/**
 	 * Get the Twig adapter
 	 * @return TwigAdapter
-	 * @todo This (and smarty) needs to move.  This isn't a good place for it.  Probably should be in Template
+	 * @todo This (and smarty) needs to move or done better.  Probably move into the TwigAdapter contructor.
+	 *        The problem with a micro framework is we start moving into hardcore DI stuff.  Not bad, but not necessarily the best solution
 	 */
 	protected function getTwigAdapter()
 	{
@@ -97,9 +101,16 @@ class View
 		
 		$loader = new \Twig_Loader_Filesystem(Configure::read('twig.templateDir'));
 		
+		$twigOpts = Configure::read('twig');
 		$opts = array();
+
+		// de-inflect the config options
+		foreach ($twigOpts as $key => $val) {
+			$opts[Inflector::uninflect($key)] = $val;
+		}
 		
-		$twig = new \Twig_Environment($loader, array('cache' => Configure::read('twig.cacheDir')));
+		$twig = new \Twig_Environment($loader, $opts);
+		
 		
 		return new TwigAdapter($twig);
 	}

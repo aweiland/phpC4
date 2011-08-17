@@ -23,6 +23,8 @@ development:
   test: override
   
   
+  
+  
 default:
   test: whatever
   
@@ -34,8 +36,13 @@ default:
   
   twig:
     templateDir: APP_PATH/App/View
-    cacheDir: TMP_PATH
-    compileDir: TMP_PATH
+    cache: false
+    debug: false
+    charset: utf-8
+    baseTemplateClass: Twig_Template
+    strictVarialbes: false
+    autoescape: true
+    
   
   smarty:
     templateDir: ROOT_PATH/app/templates

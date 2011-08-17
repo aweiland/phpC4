@@ -6,7 +6,10 @@ final class Configure
 	
 	private static $config;
 	
-	
+	/**
+	 * Init the config
+	 * @todo Add caching
+	 */
 	public static function init($type, $file)
 	{
 		self::$config = ConfigFactory::create($type, $file);
@@ -15,10 +18,10 @@ final class Configure
 	/**
 	 * Get a config value
 	 * @param string $var
-	 * @todo Make the array one dimensional and make periods a separator.
 	 */
 	public static function read($var)
 	{
+		
 		$parts = explode('.', $var);
 		
 		$config = self::get();
@@ -39,7 +42,7 @@ final class Configure
 	 */
 	public static function write($var, $val)
 	{
-		
+		self::$config[$var] = $val;
 	}
 	
 	/**

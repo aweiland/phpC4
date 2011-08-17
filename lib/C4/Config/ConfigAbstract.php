@@ -1,6 +1,9 @@
 <?php
 namespace C4\Config;
 
+use C4\Exception;
+
+
 /**
  * Just an abstract wrapper around ArrayObject
  */

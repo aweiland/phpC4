@@ -1,6 +1,10 @@
 <?php
 namespace C4\View\Template\Adapter;
 
+use C4\View\Template\Extension\TwigExtensions;
+
+use C4\View\Template\Extension\TwigUrlExtension;
+use C4\View\Template\Extension\InvalidUrlException;
 use C4\View\Template\TemplateInterface;
 
 class TwigAdapter implements TemplateInterface
@@ -10,19 +14,33 @@ class TwigAdapter implements TemplateInterface
 	
 	/**
 	 * Twig
-	 * @var Twig_Environment
+	 * @var \Twig_Environment
 	 */
 	protected $twig;
+	
+	protected $extender;
 	
 	
 	public function __construct(\Twig_Environment $twig)
 	{
 		$this->twig = $twig;
+		
+		$this->registerExtensions();
 	}
 	
+	private function registerExtensions()
+	{
+//		$this->twig->addFunction('url', new \Twig_Function_Method($this->extender, 'url'));
+
+		$this->twig->addExtension(new TwigExtensions());
+	}
+		
+		
 	
-	/* (non-PHPdoc)
-	 * @see Game\Templace.TemplateInterface::assign()
+	/**
+	 * Twig doesn't store vars, but expects them as an array at render time.  We store them
+	 * in an array here so they can be set and overridden.  It's up to the user
+	 * @see C4\View\Template.TemplateInterface::assign()
 	 */
 	public function assign($var, $val) {
 		$this->vars[$var] = $val;
@@ -30,7 +48,7 @@ class TwigAdapter implements TemplateInterface
 	}
 
 	/* (non-PHPdoc)
-	 * @see Game\Templace.TemplateInterface::render()
+	 * 
 	 */
 	public function display($name) {
 		if (strpos($name, '.twig') === false) {
@@ -46,7 +64,14 @@ class TwigAdapter implements TemplateInterface
 	 */
 	public function fetch($name) {
 		// TODO Auto-generated method stub
+		if (strpos($name, '.twig') === false) {
+			$name .= '.twig';
+		}
 		
+		$template = $this->twig->loadTemplate($name);
+		
+		// Yep render().  Seems like a strange name but check it out!
+		return  $template->render($this->vars);
 	}
 
 

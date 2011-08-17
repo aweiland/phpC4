@@ -1,6 +1,8 @@
 <?php
 namespace C4\Controller;
 
+use C4\Inflector;
+
 use C4\View\View;
 
 use C4\Container;
@@ -56,10 +58,10 @@ final class FrontController {
 		$actionName = array_shift($parts);
 		
 		$rawControllerName = (empty($controllerName)) ? 'index' : $controllerName;
-		$controllerName = self::inflect($rawControllerName);
+		$controllerName = Inflector::inflect($rawControllerName);
 		
 		$rawActionName = (empty($actionName)) ? 'index' : $actionName;
-		$actionName = self::inflect($rawActionName, false);
+		$actionName = Inflector::inflect($rawActionName, false);
 		$fullActionName = $rawActionName . 'Action';
 		
 		$controllerClass = Configure::read('frontController.controllerNamespace') . '\\' . $controllerName . 'Controller';
@@ -92,26 +94,7 @@ final class FrontController {
 		$view->display();
 	}
 	
-	/**
-	 * Inflect a string
-	 * @todo Cake has this as it's own static final class.  Not sure if one function needs it's own class...
-	 * @param unknown_type $string
-	 * @param unknown_type $ucFirst
-	 */
-	public static function inflect($string, $ucFirst = true)
-	{
-		$parts = explode('-', $string);
-		foreach ($parts as &$part) {
-			$part = ucfirst($part);
-		}
-		
-		$string = implode('', $parts);
-		if (!$ucFirst) {
-			$string = lcfirst($string);
-		}
-		
-		return $string;
-	}
+	
 	
 	public function setContainer(Container $container)
 	{
