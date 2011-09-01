@@ -11,6 +11,14 @@ production:
     annotationNamespace: Doctrine\ODM\MongoDB\Mapping\
     metadataDriverPath: LIB_PATH/Game/Documents
     
+    odm:
+      proxyDir: ROOT_PATH/app/tmp
+      hydratorDir: ROOT_PATH/app/tmp
+      hydratorNamespace: Hydrators
+      annotationNamespace: Doctrine\ODM\MongoDB\Mapping\
+      metadataDriverPath: LIB_PATH/Game/Documents
+      host: localhost
+    
       
   frontController:
     controllerNamespace: App\Controller

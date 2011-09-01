@@ -27,12 +27,21 @@ class TwigExtensions extends \Twig_Extension
 		return $url;
 	}
 	
+	public function action($action, $controller, $vars = array())
+	{
+		$vars['action'] = $action;
+		$vars['controller'] = $controller;
+		
+		return $this->url($vars);
+	}
+	
 	/* (non-PHPdoc)
 	 * @see Twig_Extension::getFunctions()
 	 */
 	public function getFunctions() {
 		return array(
-			'url' => new \Twig_Function_Method($this, 'url')
+			'url' => new \Twig_Function_Method($this, 'url'),
+			'action' => new \Twig_Function_Method($this, 'action')
 		);
 		
 	}

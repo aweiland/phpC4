@@ -11,19 +11,55 @@ use Doctrine\Common\ClassLoader,
 
 
 
-class MongoService extends ServiceAbstract
+class MongoService extends ServiceAbstract implements ServiceInterface
 {
 	
+	private $properties = array();
+	
 	/**
-	 * The DocumentManager
 	 * @var DocumentManager
 	 */
-	static $dm;
+	private $dm;
 	
+	/* (non-PHPdoc)
+	 * @see C4\Service.ServiceInterface::setProperties()
+	 */
+	public function setProperties(array $properties) {
+		$this->properties = $properties;		
+	}
+
+	public function init() {
+		$config = new Configuration();
+		$config->setProxyDir($this->properties['proxyDir']);
+		$config->setProxyNamespace($this->properties['proxyDir']);
+
+		$config->setHydratorDir($this->properties['hydratorDir']);
+		$config->setHydratorNamespace($this->properties['hydratorNamespace']);
+
+		$reader = new AnnotationReader();
+//		$reader->setDefaultAnnotationNamespace($this->properties['annotationNamespace']);
+		$config->setMetadataDriverImpl(new AnnotationDriver($reader, $this->properties['metadataDriverPath']));
+
+		$this->dm = DocumentManager::create(new Connection($this->properties['host']), $config);
+	}
+	
+	
+	/**
+	 * Get the service DocumentManager
+	 * @return DocumentManager
+	 */
+	public function getDocumentManager()
+	{
+		return $this->dm;
+	}
+	
+	
+	// -- I see Dead methods --------------------------------------------------
 	
 	/**
 	 * Get and/or start up the document manager
 	 * @return DocumentManager
+	 * @deprecated
 	 */
 	protected static function getDm()
 	{
@@ -54,6 +90,7 @@ class MongoService extends ServiceAbstract
 	/**
 	 * Get the document manager
 	 * @return DocumentManager
+	 * @deprecated
 	 */
 	protected function getDocumentManager()
 	{
@@ -64,6 +101,7 @@ class MongoService extends ServiceAbstract
 	/**
 	 * Add a document to be persisted
 	 * @param mixed $document
+	 * @deprecated
 	 */
 	public function add($document)
 	{
@@ -74,6 +112,7 @@ class MongoService extends ServiceAbstract
 	/**
 	 * Save a document
 	 * @param mixed $document
+	 * @deprecated
 	 */
 	public function save($document)
 	{

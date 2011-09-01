@@ -1,8 +1,8 @@
 <?php
 
+use C4\Service\Container;
 use C4\Configure;
 use Doctrine\Common\ClassLoader;
-use C4\Container;
 use C4\Container\TemplateContainer;
 use C4\TemplateFactory;
 use C4\ConfigFactory;
@@ -29,20 +29,17 @@ $classLoader->register();
 $classLoader = new ClassLoader('C4', LIB_PATH);
 $classLoader->register();
 
-// Site configuration
-Configure::init('yaml', APP_PATH . '/config/app.yml');
-$cfg = Configure::get();
-Registry::set('config', $cfg);
-
-// Service container
-//Registry::set('container', new Container($cfg));
-
-
 
 $classLoader = new ClassLoader('Monolog', VENDOR_PATH . '/monolog/src');
 $classLoader->register();
 
-
+// App bootstrap
 if (file_exists(APP_PATH . '/bootstrap.php')) {
 	require_once APP_PATH . '/bootstrap.php';
 }
+
+// Site configuration
+Configure::init('yaml', APP_PATH . '/config/app.yml');
+
+
+Container::init('yaml', APP_PATH . '/config/services.yml');

@@ -5,19 +5,12 @@ use C4\Inflector;
 
 use C4\View\View;
 
-use C4\Container;
 use C4\Configure;
 
 final class FrontController {
 	
 	private static $instance;
 	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @var Container
-	 */
-	private $container;
 	
 	
 	/**
@@ -35,8 +28,6 @@ final class FrontController {
 	
 	private function __construct()
 	{
-		$config = Configure::get();
-		$this->container = new Container($config);
 	}
 
 	/**
@@ -96,18 +87,5 @@ final class FrontController {
 	
 	
 	
-	public function setContainer(Container $container)
-	{
-		$this->container = $container;
-	}
-	
-	/**
-	 * Get the container
-	 * return C4\Container
-	 */
-	public function getContainer()
-	{
-		return $this->container;
-	}
 	
 }

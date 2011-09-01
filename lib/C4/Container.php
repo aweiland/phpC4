@@ -13,7 +13,7 @@ use C4\View\Template\Adapter\SmartyAdapter;
 use C4\View\Template\Template;
 use C4\Registry;
 
-final class Container
+final class Container2
 {
 	
 	protected static $shared;

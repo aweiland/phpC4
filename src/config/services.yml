@@ -1,0 +1,12 @@
+odm:
+  class: C4\Service\MongoService
+    
+  properties:
+    host: $doctrine.odm.host$
+    proxyDir: $doctrine.odm.proxyDir$
+    hydratorDir: $doctrine.odm.hydratorDir$
+    hydratorNamespace: $doctrine.odm.hydratorNamespace$
+    defaultAnnotationNamespace: $doctrine.odm.annotationNamespace$
+    metadataDriverPath: $doctrine.odm.metadataDriverPath$
+
+  
