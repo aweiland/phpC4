@@ -28,8 +28,9 @@ class Inflector
 	 * Enter description here ...
 	 * @param unknown_type $string
 	 */
-	public static function uninflect($string)
+	public static function uninflect($string, $char = '-')
 	{
-		return preg_replace('/([A-Z])/e', "'_' . strtolower('\\1')", $string);	
+		$string = lcfirst($string);
+		return preg_replace('/([A-Z])/e', "'" . $char ."' . strtolower('\\1')", $string);	
 	}
 }

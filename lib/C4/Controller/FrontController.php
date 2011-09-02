@@ -32,8 +32,6 @@ final class FrontController {
 
 	/**
 	 * Dispatch an action to a controller
-	 * @todo Remove "Layout"  It was an idea borrowed from zend, but both smarty and twig do inheritance, it's dumb
-	 * 
 	 */
 	public function dispatch()
 	{

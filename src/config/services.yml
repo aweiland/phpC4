@@ -9,4 +9,4 @@ odm:
     defaultAnnotationNamespace: $doctrine.odm.annotationNamespace$
     metadataDriverPath: $doctrine.odm.metadataDriverPath$
 
-  
+     

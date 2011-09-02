@@ -19,3 +19,6 @@ $classLoader->register();
 
 $classLoader = new ClassLoader('App', APP_PATH);
 $classLoader->register();
+
+require_once VENDOR_PATH . '/twig/lib/Twig/Autoloader.php';
+\Twig_Autoloader::register();

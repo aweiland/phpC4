@@ -1,0 +1,21 @@
+<phpunit bootstrap="./teststrap.php" colors="true" stopOnFailure="false" syntaxCheck="true" processIsolation="false" noGlobalBackup="false">
+	<testsuites>
+		<testsuite name="phpc4 tests">
+			<directory suffix=".php">./C4</directory>
+		</testsuite>
+	</testsuites>
+	
+	<filter>
+		<blacklist>
+			<directory>../vendor</directory>
+		</blacklist>
+		<whitelist>
+			<directory suffix=".php">../lib/C4</directory>
+		</whitelist>
+	</filter>
+	
+	<logging>
+		<log type="coverage-html" target="./build/coverage" charset="UTF-8" yui="true" highlight="false" lowUpperBound="20" highLowerBound="80" />
+	</logging>
+	
+</phpunit>

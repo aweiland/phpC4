@@ -7,6 +7,9 @@ use C4\Exception;
 
 use C4\Registry;
 
+/**
+ * @deprecated
+ */
 class ServiceAbstract
 {
 	protected $container;

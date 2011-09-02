@@ -38,9 +38,11 @@ final class Container {
 	private static function zeroPass()
 	{
 		foreach (self::$serviceConfig as $key => &$config) {
-			foreach ($config['properties'] as $var => $value) {
-				if (preg_match('/\$(.*?)\$$/', $value, $matches)) {
-					$config[$var] = Configure::read($matches[1]);
+			if (is_array($config['properties'])) {
+				foreach ($config['properties'] as $var => $value) {
+					if (preg_match('/\$(.*?)\$$/', $value, $matches)) {
+						$config[$var] = Configure::read($matches[1]);
+					}
 				}
 			}
 		}

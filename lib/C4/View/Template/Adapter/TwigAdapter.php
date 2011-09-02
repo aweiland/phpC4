@@ -30,8 +30,6 @@ class TwigAdapter implements TemplateInterface
 	
 	private function registerExtensions()
 	{
-//		$this->twig->addFunction('url', new \Twig_Function_Method($this->extender, 'url'));
-
 		$this->twig->addExtension(new TwigExtensions());
 	}
 		

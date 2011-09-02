@@ -74,7 +74,6 @@ class View
 	 */
 	public function initTemplate()
 	{
-		
 		$tmpl = new Template();
 		
 		switch (Configure::read('templateEngine')) {
@@ -96,8 +95,6 @@ class View
 	 */
 	protected function getTwigAdapter()
 	{
-		require_once VENDOR_PATH . '/twig/lib/Twig/Autoloader.php';
-		\Twig_Autoloader::register();
 		
 		$loader = new \Twig_Loader_Filesystem(Configure::read('twig.templateDir'));
 		
