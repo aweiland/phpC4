@@ -9,7 +9,15 @@ use C4\Exception;
  */
 abstract class ConfigAbstract extends \ArrayObject
 {
-/**
+
+	public function __construct($array)
+	{
+		$array = $this->resolveInheritance($array);
+		
+		parent::__construct($array, \ArrayObject::ARRAY_AS_PROPS);
+	}
+	
+	/**
 	 * Resolve any config inheritance data
 	 * @param array $data
 	 * @throws Exception

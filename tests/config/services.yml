@@ -1,0 +1,13 @@
+odm:
+  class: C4\Service\MongoService
+    
+  properties:
+    host: $mongo.host$
+    defaultDb: c4test
+    proxyDir: ROOT_PATH/app/tmp
+    hydratorDir: ROOT_PATH/app/tmp
+    hydratorNamespace: Hydrators
+    annotationNamespace: Doctrine\ODM\MongoDB\Mapping\
+    metadataDriverPath: ROOT_PATH/tests/Documents
+
+     

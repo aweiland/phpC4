@@ -25,9 +25,9 @@ class Yaml extends ConfigAbstract
 			throw new SyntaxException('Invalid YAML file'); 
 		}
 		
-		$cfg = $this->resolveInheritance($data);
+//		$cfg = $this->resolveInheritance($data);
 		
-		parent::__construct($cfg, \ArrayObject::ARRAY_AS_PROPS);
+		parent::__construct($data);
 	}
 	
 	/**

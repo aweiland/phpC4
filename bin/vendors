@@ -38,7 +38,7 @@ if (!is_dir($vendorDir)) {
 
 // versions
 $versions = array();
-if ('install' === $command && file_exists($rootDir.'/app/deps.lock')) {
+if ('install' === $command && file_exists($rootDir.'/src/deps.lock')) {
     foreach (file($rootDir.'/deps.lock', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
         $parts = array_values(array_filter(explode(' ', $line)));
         if (2 !== count($parts)) {
@@ -49,7 +49,7 @@ if ('install' === $command && file_exists($rootDir.'/app/deps.lock')) {
 }
 
 $newversions = array();
-$deps = parse_ini_file($rootDir.'/app/deps', true, INI_SCANNER_RAW);
+$deps = parse_ini_file($rootDir.'/src/deps', true, INI_SCANNER_RAW);
 foreach ($deps as $name => $dep) {
     // revision
     if (isset($versions[$name])) {

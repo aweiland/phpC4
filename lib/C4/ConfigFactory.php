@@ -3,6 +3,7 @@ namespace C4;
 
 use C4\ConfigAbstract;
 use C4\Config\Yaml;
+use C4\Config\ArrayData;
 
 final class ConfigFactory
 {
@@ -19,7 +20,8 @@ final class ConfigFactory
 		switch ($type) {
 			case 'yaml' : $cfg = new Yaml($file);
 				break;
-		
+			case 'array' : $cfg = new ArrayData($file);
+				break;
 			default: throw new \InvalidArgumentException('Bad config type');
 		}
 

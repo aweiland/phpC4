@@ -58,5 +58,13 @@ final class Configure
 		return self::$config;
 	}
 
+	public static function set(\ArrayObject $cfg)
+	{
+		self::$config = $cfg;
+	}
 	
+	public static function clear()
+	{
+		self::$config = null;
+	} 
 }

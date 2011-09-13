@@ -17,7 +17,7 @@ class MongoService extends ServiceAbstract implements ServiceInterface
 	private $properties = array();
 	
 	/**
-	 * @var DocumentManager
+	 * @var Doctrine\ODM\MongoDB\DocumentManager
 	 */
 	private $dm;
 	
@@ -35,8 +35,11 @@ class MongoService extends ServiceAbstract implements ServiceInterface
 
 		$config->setHydratorDir($this->properties['hydratorDir']);
 		$config->setHydratorNamespace($this->properties['hydratorNamespace']);
+		
+		$config->setDefaultDB($this->properties['defaultDb']);
 
 		$reader = new AnnotationReader();
+		AnnotationDriver::registerAnnotationClasses();
 //		$reader->setDefaultAnnotationNamespace($this->properties['annotationNamespace']);
 		$config->setMetadataDriverImpl(new AnnotationDriver($reader, $this->properties['metadataDriverPath']));
 
@@ -46,7 +49,7 @@ class MongoService extends ServiceAbstract implements ServiceInterface
 	
 	/**
 	 * Get the service DocumentManager
-	 * @return DocumentManager
+	 * @return Doctrine\ODM\MongoDB\DocumentManager
 	 */
 	public function getDocumentManager()
 	{

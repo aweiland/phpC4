@@ -4,3 +4,4 @@
 vendor/*
 tmp/*
 tests/build
+tests/tmp/*
