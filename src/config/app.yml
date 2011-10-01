@@ -9,15 +9,20 @@ production:
     hydratorNamespace: Hydrators
     
     annotationNamespace: Doctrine\ODM\MongoDB\Mapping\
-    metadataDriverPath: LIB_PATH/Game/Documents
+    metadataDriverPath: APP_PATH/Model/Entity
+    
+    cacheClass: \Doctrine\Common\Cache\ApcCache
+    
+    autoGenerateProxies: false
     
     odm:
       proxyDir: ROOT_PATH/app/tmp
       hydratorDir: ROOT_PATH/app/tmp
       hydratorNamespace: Hydrators
       annotationNamespace: Doctrine\ODM\MongoDB\Mapping\
-      metadataDriverPath: LIB_PATH/Game/Documents
+      metadataDriverPath: APP_PATH/Model/Document
       host: localhost
+      db: C4
     
       
   frontController:
@@ -30,7 +35,9 @@ development:
   test2: more
   test: override
   
-  
+  doctrine:
+    cacheClass: \Doctrine\Common\Cache\ArrayCache
+    autoGenerateProxies: false
   
   
 default:

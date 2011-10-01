@@ -30,15 +30,23 @@ final class FrontController {
 	{
 	}
 
+	
+	public function dispatch($uri = null) {
+		if (empty($uri)) {
+			$uri = $_SERVER['REQUEST_URI'];	
+		}
+	}
+	
+	
 	/**
 	 * Dispatch an action to a controller
 	 */
-	public function dispatch()
+	public function dispatch2()
 	{
 		$uri = $_SERVER['REQUEST_URI'];
 		
 		$parts = explode('/', $uri);
-		
+		var_dump($parts);
 		// Pop off the index file
 		array_shift($parts);
 		array_shift($parts);
@@ -83,6 +91,38 @@ final class FrontController {
 		$view->display();
 	}
 	
+	
+	protected function getControllerName($uri)
+	{
+		$parts = explode('/', $uri);
+		
+		// Pop off the index file
+		array_shift($parts);
+		array_shift($parts);
+		
+		$controllerName = array_shift($parts);
+		$rawControllerName = (empty($controllerName)) ? 'index' : $controllerName;
+		$controllerName = Inflector::inflect($rawControllerName);
+
+		return $controllerName;
+	}
+	
+	protected function getActionName($uri)
+	{
+		$parts = explode('/', $uri);
+		
+		// Pop off the index file
+		array_shift($parts);
+		array_shift($parts);
+		array_shift($parts);  // This one is the controller
+		
+		$actionName = array_shift($parts);
+		
+		$rawActionName = (empty($actionName)) ? 'index' : $actionName;
+		$actionName = Inflector::inflect($rawActionName, false);
+		
+		return $actionName;
+	}
 	
 	
 	

@@ -11,7 +11,7 @@ use Doctrine\Common\ClassLoader,
 
 
 
-class MongoService extends ServiceAbstract implements ServiceInterface
+class MongoService implements ServiceInterface
 {
 	
 	private $properties = array();

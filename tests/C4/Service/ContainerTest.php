@@ -6,7 +6,7 @@ class ContainerTest extends PHPUnit_Framework_TestCase
 	
 	public function testConfig()
 	{
-		C4\Service\Container::init('yaml', ROOT_PATH . '/tests/config/services.yml');
+		C4\Service\Container::init('yaml', ROOT_PATH . '/tests/config/mongo.yml');
 	}
 	
 	

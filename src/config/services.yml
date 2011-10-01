@@ -1,3 +1,14 @@
+orm:
+  properties:
+    proxyDir: $doctrine.proxyDir$
+    proxyNamespace: $doctrine.proxyNamespace$
+    metadataDriverPath: $doctrine.metadataDriverPath$
+    cacheClass: $doctrine.cacheClass$
+    autoGenerateProxies: $doctrine.autoGenerateProxies$
+    
+    connectionOptions:
+    
+
 odm:
   class: C4\Service\MongoService
     
@@ -8,5 +19,6 @@ odm:
     hydratorNamespace: $doctrine.odm.hydratorNamespace$
     defaultAnnotationNamespace: $doctrine.odm.annotationNamespace$
     metadataDriverPath: $doctrine.odm.metadataDriverPath$
+    defaultDb: $doctrine.odm.db$
 
      
