@@ -1,12 +1,14 @@
-orm:
-  properties:
-    proxyDir: $doctrine.proxyDir$
-    proxyNamespace: $doctrine.proxyNamespace$
-    metadataDriverPath: $doctrine.metadataDriverPath$
-    cacheClass: $doctrine.cacheClass$
-    autoGenerateProxies: $doctrine.autoGenerateProxies$
-    
-    connectionOptions:
+#orm:
+#  class: C4\Service\DoctrineService
+#  
+#  properties:
+#    proxyDir: $doctrine.proxyDir$
+#    proxyNamespace: $doctrine.proxyNamespace$
+#    metadataDriverPath: $doctrine.metadataDriverPath$
+#    cacheClass: $doctrine.cacheClass$
+#    autoGenerateProxies: $doctrine.autoGenerateProxies$
+#    
+#    connectionOptions:
     
 
 odm:

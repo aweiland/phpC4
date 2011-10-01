@@ -6,7 +6,7 @@ use C4\Controller\ControllerAbstract;
 class IndexController extends ControllerAbstract
 {
 
-	public function indexAction()
+	public function index()
 	{
 		
 	}

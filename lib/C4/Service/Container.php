@@ -55,10 +55,11 @@ final class Container {
 	private static function firstPass()
 	{
 		foreach (self::$serviceConfig as $key => $s) {
-			$class = $s['class'];
-			if (empty($class)) {
+			
+			if (!isset($s['class']) || empty($s['class'])) {
 				throw new InvalidServiceException(sprintf('No class defined for service [%s]', $key));	
 			}
+			$class = $s['class'];
 			
 			$rc = new \ReflectionClass($class);
 			if (!$rc->implementsInterface('C4\Service\ServiceInterface')) {
